@@ -198,7 +198,7 @@ morgan.format('dev', function developmentFormatLine (tokens, req, res) {
 
   if (!fn) {
     // compile
-    fn = developmentFormatLine[color] = compile('\x1b[0m:method :url \x1b[' +
+    fn = developmentFormatLine[color] = compile('\x1b[0m :date[locale] :method :url \x1b[' +
       color + 'm:status \x1b[0m:response-time ms - :res[content-length]\x1b[0m')
   }
 
@@ -253,6 +253,8 @@ morgan.token('date', function getDateToken (req, res, format) {
       return date.toISOString()
     case 'web':
       return date.toUTCString()
+    case 'locale':
+      return date.toLocaleString()
   }
 })
 
